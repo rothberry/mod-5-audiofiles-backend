@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   
   def index
     users = User.all
-    render json: users
+    render json: users#, include: [:active_relationships,:passive_relationships]
   end
 
   def show
