@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2019_09_19_204401) do
     t.string "img_url"
     t.string "facebook_url"
     t.string "twitter_url"
-    t.string "soundclound_url"
+    t.string "soundcloud_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

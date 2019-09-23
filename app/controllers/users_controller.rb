@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
+  # skip_before_action :authorized, only: [:create, :index]
   
   def index
     users = User.all
@@ -12,9 +13,22 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
+    p '#########################################'
+    # user = User.new(user_params)
+    user = User.new(
+      username: params[:username],
+      name: params[:name],
+      password: params[:password],
+      location: params[:location],
+      bio: params[:bio],
+      img_url: params[:img_url],
+      facebook_url: params[:facebook_url],
+      twitter_url: params[:twitter_url],
+      soundcloud_url: params[:soundcloud_url]
+    )
     if user.save
-      render json: user, status: :created
+      token = issue_token(user)
+      render json: {user: user, jwt: token}, status: :created
     else
       render json: {error: user.errors.full_messages}, status: :not_acceptable
     end

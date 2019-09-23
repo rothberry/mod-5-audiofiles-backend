@@ -12,7 +12,7 @@ Tag.destroy_all
 Song.destroy_all
 SongTag.destroy_all
 
-User.create(username: 'rothberry', name: 'phil', password: '123', location: 'Kzoo', bio: 'sup')
+User.create(username: 'rothberry', name: 'phil', password: '123', location: 'Kzoo', bio: 'sup', img_url: '', facebook_url: 'https://www.facebook.com/Rothberry-Music-266464367571291/', twitter_url: 'https://twitter.com/rothberry_', soundcloud_url: 'https://soundcloud.com/rothberry')
 User.create(username: 'graceo', name: 'grace', password: '123', location: 'Chicago', bio: 'sup')
 User.create(username: 'mal', name: 'malisa', password: '123', location: 'Chicago', bio: 'sup')
 User.create(username: 'c-lim', name: 'christian', password: '123', location: 'Chicago', bio: 'sup')

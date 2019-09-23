@@ -11,7 +11,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       #? Social media Links
       t.string :facebook_url
       t.string :twitter_url
-      t.string :soundclound_url
+      t.string :soundcloud_url
 
       t.timestamps
     end
