@@ -3,6 +3,7 @@ class Song < ApplicationRecord
   has_many :favorites
   belongs_to :user
   
+  has_many :song_tags
   has_many :tags, through: :song_tags
 
   has_one_attached :song_link
