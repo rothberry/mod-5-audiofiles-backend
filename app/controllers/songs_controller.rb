@@ -9,7 +9,7 @@ class SongsController < ApplicationController
     songs.map do | song |
       p song.song_link
       if (song.song_link.attached?)
-        song_link = Rails.application.routes.url_helpers.rails_blob_path(song.song_link, only_path: true)
+        song_link = url_for(song.song_link)
         song_array.push({ song: song, song_link: song_link })
       else
         song_array.push({ song: song })
@@ -36,13 +36,9 @@ class SongsController < ApplicationController
   # POST /songs.json
   def create
     song = Song.new(song_params)
-    p '************SONG*******'
-    p song
-    # p '************SONG LINK*******'
-    # p params[:song_link]
-    # song.song_link.attach(params[:song_link])
+    p '*************************SONG CREATE***************'
     if song.save
-      render json: song, status: :created
+      render json: { song: song, song_link: url_for(song.song_link) }, status: :created
     else
       render json: {error: song.errors.full_messages}, status: :not_acceptable
     end
@@ -51,12 +47,7 @@ class SongsController < ApplicationController
   # PATCH/PUT /songs/1
   # PATCH/PUT /songs/1.json
   def update
-    song = Song.find(params[:id])
     p '************SONG UPDATE*******'
-    p song_params
-    p song
-    p '************SONG LINK*******'
-    p params[:song_link]
     song.song_link.attach(params[:song_link])
     if song.update(song_params)
       render json: song, status: :ok
