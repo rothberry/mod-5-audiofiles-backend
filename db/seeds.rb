@@ -12,35 +12,48 @@ Tag.destroy_all
 Song.destroy_all
 SongTag.destroy_all
 
-User.create(username: 'rothberry', name: 'phil', password: '123', location: 'Kzoo', bio: 'sup', img_url: '', facebook_url: 'https://www.facebook.com/Rothberry-Music-266464367571291/', twitter_url: 'https://twitter.com/rothberry_', soundcloud_url: 'https://soundcloud.com/rothberry')
-User.create(username: 'graceo', name: 'grace', password: '123', location: 'Chicago', bio: 'sup')
-User.create(username: 'mal', name: 'malisa', password: '123', location: 'Chicago', bio: 'sup')
-User.create(username: 'c-lim', name: 'christian', password: '123', location: 'Chicago', bio: 'sup')
-User.create(username: 'bruceo', name: 'bruce', password: '123', location: 'Chicago', bio: 'sup')
+rothberry = User.new(username: 'rothberry', name: 'phil', password: '123', location: 'Kzoo', bio: 'sup', img_url: '', facebook_url: 'https://www.facebook.com/Rothberry-Music-266464367571291/', twitter_url: 'https://twitter.com/rothberry_', soundcloud_url: 'https://soundcloud.com/rothberry')
+graceo = User.new(username: 'graceo', name: 'grace', password: '123', location: 'Chicago', bio: 'sup')
+mal = User.new(username: 'mal', name: 'malisa', password: '123', location: 'Chicago', bio: 'sup')
+clim = User.new(username: 'c-lim', name: 'christian', password: '123', location: 'Chicago', bio: 'sup')
+bruceo = User.new(username: 'bruceo', name: 'bruce', password: '123', location: 'Chicago', bio: 'sup')
+rothberry.save
+graceo.save
+mal.save
+clim.save
+bruceo.save
 
-Following.create(followed_id: 1, follower_id: 2)
-Following.create(followed_id: 1, follower_id: 3)
-Following.create(followed_id: 1, follower_id: 4)
-Following.create(followed_id: 1, follower_id: 5)
-Following.create(followed_id: 2, follower_id: 1)
-Following.create(followed_id: 2, follower_id: 3)
-Following.create(followed_id: 3, follower_id: 5)
+Following.create(followed_id: rothberry.id, follower_id: graceo.id)
+Following.create(followed_id: rothberry.id, follower_id: mal.id)
+Following.create(followed_id: rothberry.id, follower_id: clim.id)
+Following.create(followed_id: rothberry.id, follower_id: bruceo.id)
+Following.create(followed_id: graceo.id, follower_id: rothberry.id)
+Following.create(followed_id: graceo.id, follower_id: mal.id)
+Following.create(followed_id: mal.id, follower_id: bruceo.id)
 
-Tag.create(name: 'ableton')
-Tag.create(name: 'loop')
-Tag.create(name: 'one_shot')
-Tag.create(name: 'wip')
+ableton = Tag.new(name: 'ableton')
+loop_one = Tag.new(name: 'loop')
+one_shot = Tag.new(name: 'one_shot')
+wip = Tag.new(name: 'wip')
+ableton.save
+loop_one.save
+one_shot.save
+wip.save
 
-Song.create(title: 'Banger 1', user_id: 1, genre: 'Trap', description: 'it\'s lit')
-Song.create(title: 'Yollow Me home', user_id: 2, genre: 'House', description: 'idk, my bff jill')
-Song.create(title: 'Stairway to Seven', user_id: 3, genre: 'Trap', description: 'wowowowowowowow')
-Song.create(title: 'Banger 2', user_id: 1, genre: 'Trap', description: 'fire emoji')
+Banger_1 = Song.new(title: 'Banger 1', user_id: rothberry.id, genre: 'Trap', description: 'it\'s lit')
+Yollow = Song.new(title: 'Yollow Me home', user_id: graceo.id, genre: 'House', description: 'idk, my bff jill')
+Stairway = Song.new(title: 'Stairway to Seven', user_id: mal.id, genre: 'Trap', description: 'wowowowowowowow')
+Banger_2 = Song.new(title: 'Banger 2', user_id: rothberry.id, genre: 'Trap', description: 'fire emoji')
+Banger_1.save
+Yollow.save
+Stairway.save
+Banger_2.save
 
-SongTag.create(song_id: 1, tag_id: 1)
-SongTag.create(song_id: 1, tag_id: 2)
-SongTag.create(song_id: 2, tag_id: 3)
-SongTag.create(song_id: 2, tag_id: 3)
-SongTag.create(song_id: 3, tag_id: 1)
-SongTag.create(song_id: 3, tag_id: 3)
-SongTag.create(song_id: 4, tag_id: 3)
-SongTag.create(song_id: 4, tag_id: 4)
+SongTag.create(song_id: Banger_1.id, tag_id: ableton.id)
+SongTag.create(song_id: Banger_1.id, tag_id: loop_one.id)
+SongTag.create(song_id: Yollow.id, tag_id: one_shot.id)
+SongTag.create(song_id: Yollow.id, tag_id: one_shot.id)
+SongTag.create(song_id: Stairway.id, tag_id: ableton.id)
+SongTag.create(song_id: Stairway.id, tag_id: one_shot.id)
+SongTag.create(song_id: Banger_2.id, tag_id: one_shot.id)
+SongTag.create(song_id: Banger_2.id, tag_id: wip.id)

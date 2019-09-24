@@ -4,12 +4,15 @@ class UsersController < ApplicationController
   
   def index
     users = User.all
-    render json: users#, include: [:active_relationships,:passive_relationships]
+    render json: users, include: [:active_relationships,:passive_relationships]
   end
 
   def show
     user = User.find_by(id: params[:id])
-    render json: user
+    followed_array = user.active_relationships.map(&:followed_id)
+    follower_array = user.passive_relationships.map(&:follower_id)
+    # render json: user
+    render json: {user: user, followed: followed_array, follower: follower_array} 
   end
 
   def create

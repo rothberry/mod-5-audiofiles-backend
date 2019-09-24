@@ -7,5 +7,5 @@ class Song < ApplicationRecord
 
   has_one_attached :song_link
 
-  validates :title, :description, :genre, :user_id, presence: true
+  validates :title, :description, :genre, :user_id, :song_link, presence: true
 end
