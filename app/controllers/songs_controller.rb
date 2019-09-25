@@ -26,10 +26,21 @@ class SongsController < ApplicationController
 
   # POST /songs
   def create
+    p '*************************SONG CREATE START***************'
     song = Song.new(song_params)
-    p '*************************SONG CREATE***************'
     if song.save
-      render json: { song: song, song_link: url_for(song.song_link) }, status: :created
+    p '*************************SONG IS CREATED***************'
+      # ? If song is created
+      tagsArray = params[:tags][:tags].split(',')
+      p tagsArray
+      # ? use tags array to find or create new tags
+      tagsArray.map do | tag | 
+        p '*************************MAPPING TAGS***************'
+        # ? for each tag, do song.song_tags.create with that tag_id
+        newTag = Tag.find_or_create_by(name: tag)
+        song.song_tags.create(tag_id: newTag.id)
+      end
+      render json: { song: song, song_link: url_for(song.song_link) }, includes: [:user, :tags, :favorites], status: :created
     else
       render json: {error: song.errors.full_messages}, status: :not_acceptable
     end
