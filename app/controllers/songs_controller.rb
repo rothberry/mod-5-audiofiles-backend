@@ -2,7 +2,6 @@ class SongsController < ApplicationController
   before_action :set_song, only: [:show, :edit, :update, :destroy]
 
   # GET /songs
-  # GET /songs.json
   def index
     songs = Song.all
     song_array = []
@@ -15,28 +14,17 @@ class SongsController < ApplicationController
         song_array.push({ song: song })
       end
     end
-    render json: song_array, include: [:user, :tags]
+    render json: song_array, include: [:user, :tags, :favorites]
   end
 
   # GET /songs/1
-  # GET /songs/1.json
   def show
     song = Song.find(params[:id])
     link = url_for(song.song_link)
-    render json: {song: song, song_link: link}, include: [:user, :tags], status: :success
-  end
-
-  # GET /songs/new
-  def new
-    song = Song.new
-  end
-
-  # GET /songs/1/edit
-  def edit
+    render json: {song: song, song_link: link}, include: [:user, :tags, :favorites], status: :success
   end
 
   # POST /songs
-  # POST /songs.json
   def create
     song = Song.new(song_params)
     p '*************************SONG CREATE***************'
@@ -48,8 +36,7 @@ class SongsController < ApplicationController
   end
 
   # PATCH/PUT /songs/1
-  # PATCH/PUT /songs/1.json
-  def update
+ def update
     p '************SONG UPDATE*******'
     song.song_link.attach(params[:song_link])
     if song.update(song_params)
@@ -60,7 +47,6 @@ class SongsController < ApplicationController
   end
 
   # DELETE /songs/1
-  # DELETE /songs/1.json
   def destroy
     song.destroy
     render json: {message: "Song deleted"}

@@ -18,6 +18,13 @@ class TagsController < ApplicationController
     end
   end
 
+  # DELETE /tags/1
+  def destroy
+    tag.destroy
+    render json: {message: "Tag deleted"}
+  end
+  
+  
   private
 
   def set_tag

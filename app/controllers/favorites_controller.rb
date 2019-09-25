@@ -3,6 +3,7 @@ class FavoritesController < ApplicationController
 
   def create
     favorite = Favorite.new(favorite_params)
+    p favorite
     if favorite.save
       render json: favorite, status: :created
     else
@@ -22,7 +23,7 @@ class FavoritesController < ApplicationController
   end
 
   def favorite_params
-    params.require(:favorite)
+    params.require(:favorite).permit(:user_id, :song_id)
   end
   
 end
