@@ -40,7 +40,7 @@ class SongsController < ApplicationController
         newTag = Tag.find_or_create_by(name: tag)
         song.song_tags.create(tag_id: newTag.id)
       end
-      render json: { song: song, song_link: url_for(song.song_link) }, includes: [:user, :tags, :favorites], status: :created
+      render json: { song: song, song_link: url_for(song.song_link) }, include: [:user, :tags, :favorites], status: :created
     else
       render json: {error: song.errors.full_messages}, status: :not_acceptable
     end
