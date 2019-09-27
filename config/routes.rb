@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :comments
   resources :favorites, only: [:create, :show, :destroy]
-  resources :song_tags
+  resources :song_tags, except: [:show, :edit]
   resources :tags
   resources :songs
   resources :users

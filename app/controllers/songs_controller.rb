@@ -14,14 +14,14 @@ class SongsController < ApplicationController
         song_array.push({ song: song })
       end
     end
-    render json: song_array, include: [:user, :tags, :favorites]
+    render json: song_array, include: [:user, :tags, :favorites, :comments]
   end
 
   # GET /songs/1
   def show
     song = Song.find(params[:id])
     link = url_for(song.song_link)
-    render json: {song: song, song_link: link}, include: [:user, :tags, :favorites], status: :success
+    render json: {song: song, song_link: link}, include: [:user, :tags, :favorites, :comments], status: :success
   end
 
   # POST /songs

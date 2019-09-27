@@ -1,17 +1,13 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:edit, :update, :show, :destroy]
+  before_action :set_comment, only: [:update, :show, :destroy]
 
   def index
     comments = Comment.all
     render json: comments
   end
-
-  def show
-    set_comment
-    render json: comment
-  end
   
   def create
+    p '************COMMENT CREATE***********'
     comment = Comment.new(comment_params)
     if comment.save
       render json: comment, status: :created
@@ -40,7 +36,7 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment)
+    params.require(:comment).permit(:content, :user_id, :song_id)
   end
 
 end
