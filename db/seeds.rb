@@ -31,14 +31,14 @@ Following.create(followed_id: graceo.id, follower_id: rothberry.id)
 Following.create(followed_id: graceo.id, follower_id: mal.id)
 Following.create(followed_id: mal.id, follower_id: bruceo.id)
 
-ableton = Tag.new(name: 'ableton')
-loop_one = Tag.new(name: 'loop')
-one_shot = Tag.new(name: 'one_shot')
-wip = Tag.new(name: 'wip')
-ableton.save
-loop_one.save
-one_shot.save
-wip.save
+tag_arr = %w(ableton loop one_shot wip reaper fl_studio pro_tools synth sample drum_loop field_sample)
+tag_arr.each do |tag|
+  Tag.create(name: tag)  
+end
+# Tag.create(name: 'ableton')
+# Tag.create(name: 'loop')
+# Tag.create(name: 'one_shot')
+# Tag.create(name: 'wip')
 
 # Banger_1 = Song.new(title: 'Banger 1', user_id: rothberry.id, genre: 'Trap', description: 'it\'s lit')
 # Yollow = Song.new(title: 'Yollow Me home', user_id: graceo.id, genre: 'House', description: 'idk, my bff jill')

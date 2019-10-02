@@ -10,7 +10,7 @@ class FollowingsController < ApplicationController
     @followed_user = User.find_by(id: params[:following][:followed_id])
     @relationship = current_user.active_relationships.new(followed_id: @followed_user.id)
     if @relationship.save
-      render json: @relationship, status: :created
+      render json: {relationship: @relationship, active_relationships: @followed_user.active_relationships}, status: :created
     else
       render json: {error: 'Relationship not created'}, status: :not_acceptable
     end

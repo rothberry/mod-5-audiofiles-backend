@@ -2,7 +2,9 @@ class FavoritesController < ApplicationController
   before_action :set_favorite, only: [:destroy]
 
   def create
+    p '**********CREATE FAVORITES*******'
     favorite = Favorite.new(favorite_params)
+    p favorite_params
     p favorite
     if favorite.save
       render json: favorite, status: :created
@@ -12,6 +14,8 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
+    p '**********DESTROY FAVORITES*******'
+    favorite = Favorite.find_by(id: params[:id])
     favorite.destroy
     render json: {message: "Favorite Deleted"}
   end

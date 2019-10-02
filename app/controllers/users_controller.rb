@@ -38,6 +38,26 @@ class UsersController < ApplicationController
   end
 
   def update
+    p '************UPDATE USER************'
+    # user = User.find_by(id: params[:id])
+    user = current_user
+    p '************PARAMS************'
+    p params
+    p '************USER************'
+    p user
+    p '************USER PARAMS************'
+    p user_params = {
+      id: params[:id],
+      username: params[:username],
+      name: params[:name],
+      # password: params[:password],
+      location: params[:location],
+      bio: params[:bio],
+      img_url: params[:img_url],
+      facebook_url: params[:facebook_url],
+      twitter_url: params[:twitter_url],
+      soundcloud_url: params[:soundcloud_url]
+    }
     if user.update(user_params)
       render json: user, status: :ok
     else
@@ -46,6 +66,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    p '************DELETE USER************'
+    user = User.find_by(id: params[:id])
     user.destroy
     render json: {message: "User Deleted"}
   end
@@ -57,7 +79,8 @@ class UsersController < ApplicationController
   end
   
   def user_params
-    params.require(:user)
+    params.require(:user).permit(:username, :name, :location, :bio, :soundcloud_url, :img_url, :twitter_url, :facebook_url)
+    # params.permit!
   end
   
 end

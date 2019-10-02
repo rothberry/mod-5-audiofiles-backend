@@ -18,7 +18,7 @@ class Api::V1::AuthController < ApplicationController
   def show
     p "*************************************************"
     if logged_in?
-      render json: {user: current_user}, status: :accepted
+      render json: {user: current_user}, include: [:active_relationships,:passive_relationships], status: :accepted
     else
       render json: {error: 'Invalid Token'}, status: :unauthorized
     end
