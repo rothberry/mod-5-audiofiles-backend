@@ -31,7 +31,7 @@ Following.create(followed_id: graceo.id, follower_id: rothberry.id)
 Following.create(followed_id: graceo.id, follower_id: mal.id)
 Following.create(followed_id: mal.id, follower_id: bruceo.id)
 
-tag_arr = %w(ableton loop one_shot wip reaper fl_studio pro_tools synth sample drum_loop field_sample)
+tag_arr = %w(ableton loop one_shot wip reaper fl_studio pro_tools synth sample drum_loop field_sample edit live logic cubase push massive sylenth analog wobble dub)
 tag_arr.each do |tag|
   Tag.create(name: tag)  
 end
