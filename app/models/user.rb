@@ -11,7 +11,8 @@ class User < ApplicationRecord
   
   # accepts_nested_attributes_for :songs, :favorites, :followed_users, :follower_users, :comments
 
-  validates :username, :password, :name, :location, :bio, presence: true
+  validates :username, :name, :location, :bio, presence: true
+  validates_presence_of :password, on: :create
   validates :username, uniqueness: true
   validates :username, length: {minimum: 1, maximum: 20}
 end
