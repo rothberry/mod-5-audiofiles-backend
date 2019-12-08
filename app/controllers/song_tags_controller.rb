@@ -8,6 +8,7 @@ class SongTagsController < ApplicationController
 
   def create
     song_tag = SongTag.new(song_tag_params)
+    p '*******************SONG_TAG CREATE************'
     if song_tag.save
       render json: song_tag, status: :created
     else
